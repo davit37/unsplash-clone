@@ -2,26 +2,31 @@ import React, {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-import {Thumbnail, WrapperThumb, WrapperFocus, HeaderCard, WrapperLike} from "./Style";
+import {Thumbnail, WrapperThumb, WrapperFocus, HeaderCard, SmallBtn,fullSize} from "./Style";
 
 
 
 class Contents extends Component{
 
-  
+    
     render(){
 
-        const {list, showModal }  = this.props;
+        const {list, showModal, isLogin }  = this.props;
        
 
         return(
             <div style={{textAlign:'left'}}>
                 {list.map(item =>
 
-                    <WrapperThumb key={item.id} onClick={()=>showModal(item.id,item.urls.regular, item.alt_description)} >
+                    <WrapperThumb key={item.id}  >
                         <WrapperFocus >
+                            <div style={fullSize} onClick={()=>showModal(item.id,item.urls.regular, item.alt_description)}></div>
                             
-                            <HeaderCardWrapper/>
+                            <HeaderCardWrapper
+                                downloadLocation={`${item.links.download}?force=true`}  
+                                isLogin={isLogin}
+                                
+                            />
 
                         </WrapperFocus>
                         <Thumbnail src={item.urls.small} alt="img"  />
@@ -33,11 +38,15 @@ class Contents extends Component{
     }
 }
 
-const HeaderCardWrapper = ()=>(
+const HeaderCardWrapper = ({downloadLocation, isLogin})=>(
     <HeaderCard>
-        <WrapperLike>
+        <SmallBtn onClick={()=>isLogin(true)}>
              <FontAwesomeIcon icon="heart" color="#ff7979" />
-        </WrapperLike>
+        </SmallBtn>
+
+        <SmallBtn href={downloadLocation} >
+             <FontAwesomeIcon icon="download" color="#34495e" />
+        </SmallBtn>
     </HeaderCard>
 )
 export default Contents;

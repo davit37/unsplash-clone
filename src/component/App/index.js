@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faTimes, faDownload } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -25,7 +25,7 @@ import {
     PATH_BASE,
 } from '../../constants';
 
-library.add(faHeart,faTimes)
+library.add(faHeart,faTimes,faDownload)
 
 class App extends Component{
 
@@ -39,6 +39,7 @@ class App extends Component{
             isShow: false,
             zoomImage: null,
             imageAlt:null,
+            isLogin:false,
         }
 
         this.fetchGetPhotoes = this.fetchGetPhotoes.bind(this);
@@ -48,6 +49,7 @@ class App extends Component{
         this.handleScroll = this.handleScroll.bind(this);
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this)
+        this.setLogin = this.setLogin.bind(this)
     }
 
     fetchGetPhotoes(searchTerm, page=1){
@@ -135,16 +137,27 @@ class App extends Component{
         this.setState({
             isShow: false,
             zoomImage:null,
+            isLogin:false
         })
     }
 
+    setLogin(isLogin){
+        this.setState({
+            isLogin:isLogin,
+            isShow: true,
+        })
+    }
+
+    
+
     render(){
-        const {searchTerm, results, isShow,zoomImage} = this.state;
+        const {searchTerm, results, isShow, isLogin, zoomImage} = this.state;
 
         return(
             <div>
             <Modal
                 isShow={isShow}
+                isLogin={isLogin}
                 closeModal={this.closeModal}
                 zoomImage={zoomImage}
             />
@@ -164,6 +177,7 @@ class App extends Component{
                         <Contents
                             list={results}
                             showModal={this.showModal}
+                            isLogin={this.setLogin}
                             />
                         :
                             ""

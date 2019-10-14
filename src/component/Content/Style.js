@@ -47,15 +47,19 @@ const HeaderCard = styled.div`
     }
 `;
 
-const WrapperLike =styled.div`
+const SmallBtn =styled.a`
     height: 60%;
     margin:10px;
-    margin-left: auto;
+    margin-left: 3px;
+    float:right;
     width: 46px;
     padding-top: 11px;
     background-color: #ffffffd1;
     border:none;
     border-radius: 10%;
+    display:inline-block;
+    
+    cursor:pointer;
 `;
 
 
@@ -82,6 +86,7 @@ const ModalContentWrapper = styled.div`
     margin-bottom: 10px;
     top:10%;
     border-radius:0.5px;
+    z-index:2;
     
 `;
 
@@ -91,7 +96,14 @@ const WrapperZoomImage = styled.div`
     width: 50%; 
     height: inherit;
 `;
+
+const fullSize={
+    height:'100%',
+    width:'100%',
+    position:'absolute',
+    top:'0',
+}
     
 
 
-export {Thumbnail, WrapperThumb, WrapperFocus, HeaderCard, WrapperLike, ModalContainer,  ModalContentWrapper, WrapperZoomImage}
+export {Thumbnail, WrapperThumb, WrapperFocus, HeaderCard, SmallBtn, ModalContainer,  ModalContentWrapper, WrapperZoomImage, fullSize}
